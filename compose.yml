@@ -1,0 +1,19 @@
+version: '3'
+
+services:
+  gitea-runner:
+    image: gitea/act_runner:latest
+    container_name: gitea-runner
+    restart: always
+    environment:
+      - GITEA_INSTANCE_URL=http://gitea.example.com # Replace with your Gitea instance URL
+      - GITEA_RUNNER_REGISTRATION_TOKEN= abcdefghijklmnopqrstuv # Replace with your token
+      - GITEA_RUNNER_NAME=my-gitea-runner
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock
+      - ./data:/data # Replace with the path where you want to store runner data
+
+networks:
+  default:
+    external:
+      name: gitea-network # Replace with your existing network name if needed
